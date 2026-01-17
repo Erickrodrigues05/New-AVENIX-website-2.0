@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --primary: #D77544;
+  /* Grey Orange */
+  --secondary: #00122A;
+  /* Dark Blue */
+  --accent: #00D4FF;
+  /* Vivid Cyan */
+  --text-muted: #cccccc;
+  --border-color: #333333;
+}
+
+@layer base {
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-outfit), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Global Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 0 10px rgba(215, 117, 68, 0.5);
+}
+
+.btn-primary:hover {
+  background: #C06030;
+  box-shadow: 0 0 20px rgba(215, 117, 68, 0.7);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Accessibility: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling (respects reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Performance: Hardware acceleration for animations */
+.animate-pulse,
+[class*="transition"] {
+  will-change: transform, opacity;
+}
+
+/* Explicit Marquee Animation to bypass Tailwind Config issues */
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-33.333333%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-right {
+  animation: marquee-right 30s linear infinite;
+  min-width: 100%;
+}
+
+/* Pause on hover option */
+
+/* Explicit Marquee Animation: Right to Left (Standard V2) */
+@keyframes marquee-standard-v2 {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-marquee-standard-v2 {
+  animation: marquee-standard-v2 30s linear infinite;
+  min-width: 100%;
+}
+
+/* Pause on hover option */
+.group:hover .animate-marquee-standard-v2 {
+  animation-play-state: paused;
+}
