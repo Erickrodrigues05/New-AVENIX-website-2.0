@@ -98,10 +98,10 @@ export default function ProcessTimeline() {
                                 {/* Visual Side - Tech Card (Same as SystemDetails) */}
                                 <div className="flex-1 w-full perspective-1000">
                                     <Reveal width="100%">
-                                        <div className="relative group transform transition-transform duration-700 hover:rotate-y-2 hover:scale-105">
+                                        <div className="relative group transform transition-transform duration-500 hover:rotate-y-2 hover:scale-105">
 
                                             {/* Ambient Glow */}
-                                            <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-20 blur-[100px] rounded-full group-hover:opacity-30 transition-opacity duration-700`} />
+                                            <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-20 blur-[100px] rounded-full group-hover:opacity-30 transition-opacity duration-500`} />
 
                                             {/* Holographic Card - Same structure as SystemDetails */}
                                             <div className="relative bg-zinc-900/80 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 md:p-12 overflow-hidden group-hover:border-white/20 transition-colors">

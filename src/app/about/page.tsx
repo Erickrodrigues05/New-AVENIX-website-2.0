@@ -5,6 +5,7 @@ import FAQ from "@/components/FAQ";
 import { AboutHero, MissionStats, ValuesGrid, Comparison, TeamGrid } from "@/components/AboutComponents";
 import Link from "next/link";
 import { Metadata } from "next";
+import Partnership from "@/components/Partnership";
 
 export const metadata: Metadata = {
     title: "About AVENIX — Building Automation Infrastructure for the Future",
@@ -17,11 +18,14 @@ export default function AboutPage() {
             <Navbar />
 
             <AboutHero />
-            <Logos />
+            {/* <Logos /> Disable until we have more partners */}
 
             <MissionStats />
             <ValuesGrid />
             <Comparison />
+
+            <Partnership />
+
             <TeamGrid />
 
             <FAQ

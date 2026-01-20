@@ -135,23 +135,5 @@ a {
 
 /* Pause on hover option */
 
-/* Explicit Marquee Animation: Right to Left (Standard V2) */
-@keyframes marquee-standard-v2 {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(-33.333333%);
-  }
-}
-
-.animate-marquee-standard-v2 {
-  animation: marquee-standard-v2 30s linear infinite;
-  min-width: 100%;
-}
-
 /* Pause on hover option */
-.group:hover .animate-marquee-standard-v2 {
-  animation-play-state: paused;
-}
+/* Robust Marquee Animation removed - using Framer Motion */

@@ -175,7 +175,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Website / LinkedIn</label>
                                     <div className="relative">
                                         <Globe className="input-icon" />
-                                        <input type="text" placeholder="Ex: www.suaempresa.co.ao" className="input-field pl-10"
+                                        <input type="text" placeholder="Ex: www.suaempresa.co.ao" className="input-field input-padding-left"
                                             value={formData.website} onChange={(e) => setFormData({ ...formData, website: e.target.value })} />
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Nome do Representante</label>
                                         <div className="relative">
                                             <UserCheck className="input-icon" />
-                                            <input type="text" required placeholder="Seu Nome" className="input-field pl-10"
+                                            <input type="text" required placeholder="Seu Nome" className="input-field input-padding-left"
                                                 value={formData.repName} onChange={(e) => setFormData({ ...formData, repName: e.target.value })} />
                                         </div>
                                     </div>
@@ -220,7 +220,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Sector de Atuação</label>
                                         <div className="relative">
                                             <Briefcase className="input-icon" />
-                                            <input type="text" required placeholder="Ex: Logística e Distribuição" className="input-field pl-10"
+                                            <input type="text" required placeholder="Ex: Logística e Distribuição" className="input-field input-padding-left"
                                                 value={formData.sector} onChange={(e) => setFormData({ ...formData, sector: e.target.value })} />
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Dimensão da Equipa</label>
                                         <div className="relative">
                                             <Users className="input-icon" />
-                                            <select required className="input-field pl-10 appearance-none"
+                                            <select required className="input-field input-padding-left appearance-none"
                                                 value={formData.teamSize} onChange={(e) => setFormData({ ...formData, teamSize: e.target.value })}>
                                                 <option value="" disabled>Selecione...</option>
                                                 <option value="1-10">1 - 10 Colaboradores</option>
@@ -257,7 +257,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Faturação Anual (Estimativa)</label>
                                     <div className="relative">
                                         <CreditCard className="input-icon" />
-                                        <select required className="input-field pl-10 appearance-none"
+                                        <select required className="input-field input-padding-left appearance-none"
                                             value={formData.annualRevenue} onChange={(e) => setFormData({ ...formData, annualRevenue: e.target.value })}>
                                             <option value="" disabled>Selecione o intervalo...</option>
                                             <option value="<10M">Inferior a 10 Milhões Kz</option>
@@ -306,7 +306,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Meta de Crescimento (12 Meses)</label>
                                     <div className="relative">
                                         <Rocket className="input-icon" />
-                                        <input type="text" required placeholder="Ex: Dobrar a faturação; Reduzir custos em 30%..." className="input-field pl-10"
+                                        <input type="text" required placeholder="Ex: Dobrar a faturação; Reduzir custos em 30%..." className="input-field input-padding-left"
                                             value={formData.growthGoal} onChange={(e) => setFormData({ ...formData, growthGoal: e.target.value })} />
                                     </div>
                                 </div>
@@ -327,7 +327,8 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Urgência de Implementação</label>
                                         <div className="relative">
                                             <Calendar className="input-icon" />
-                                            <select required className="input-field pl-10 appearance-none"
+                                            <select required className="input-field input-padding-left appearance-none"
+
                                                 value={formData.timeline} onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}>
                                                 <option value="" disabled>Quando?</option>
                                                 <option value="Imediato">Imediato (Crítico)</option>
@@ -430,10 +431,13 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                     background-color: rgba(0, 0, 0, 0.5);
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 0.75rem;
-                    padding: 1rem 1rem 1rem 1rem;
+                    padding: 1rem;
                     color: white;
                     transition: all 0.2s;
                     outline: none;
+                }
+                .input-padding-left {
+                    padding-left: 3.5rem !important;
                 }
                 .input-field:focus {
                     border-color: rgba(215, 117, 68, 0.5);
@@ -450,6 +454,7 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                     width: 1.25rem;
                     height: 1.25rem;
                     color: #9ca3af;
+                    pointer-events: none;
                 }
             `}</style>
         </section>

@@ -103,8 +103,8 @@ export default function RootLayout({
                 "description": "Enterprise automation systems and digital infrastructure company",
                 "areaServed": "Global",
                 "sameAs": [
-                  "https://www.linkedin.com/company/avenix",
-                  "https://www.instagram.com/avenix.ai"
+                  "https://www.linkedin.com/in/avenix-lda-bb0615399/",
+                  "https://www.instagram.com/avenix.ia/"
                 ]
               },
               {

@@ -40,8 +40,8 @@ const infraOptions = [
     {
         id: "mobile-app",
         name: "App Mobile (iOS/And)",
-        description: "Aplicativo nativo para lojas.",
-        setupPrice: 1550000,
+        description: "Aplicativo nativo Premium.",
+        setupPrice: 15000000,
         monthlyPrice: 189900,
         icon: Smartphone
     }
@@ -62,35 +62,35 @@ const autoOptions = [
         id: "agent-faq",
         name: "Agente de Triagem",
         description: "Tira dúvidas e filtra leads 24/7.",
-        setupPrice: 90000,
-        monthlyPrice: 79900,
+        setupPrice: 180000,
+        monthlyPrice: 150000,
         icon: MessageSquare
     },
     {
         id: "agent-sales",
         name: "Agente de Vendas",
         description: "Qualifica e agenda reuniões.",
-        setupPrice: 160000,
-        monthlyPrice: 99900,
+        setupPrice: 350000,
+        monthlyPrice: 280000,
         icon: Bot
     },
     {
         id: "agent-ops",
         name: "Agente Operacional",
         description: "Suporte técnico e processos.",
-        setupPrice: 280000,
-        monthlyPrice: 140000,
+        setupPrice: 600000,
+        monthlyPrice: 450000,
         icon: BrainCircuit
     }
 ];
 
 const autoAddons = [
-    { id: "whatsapp", name: "WhatsApp API Oficial", price: 25000, monthly: 17000 },
-    { id: "crm", name: "Integração CRM", price: 45000, monthly: 8000 },
-    { id: "voice", name: "Voz (Áudio <-> Texto)", price: 60000, monthly: 26900 },
-    { id: "vision", name: "Visão Computacional", price: 95000, monthly: 37800 },
-    { id: "calendar", name: "Agendamento Auto", price: 75000, monthly: 9000 },
-    { id: "active", name: "Disparos Ativos", price: 65000, monthly: 15000 },
+    { id: "whatsapp", name: "WhatsApp API Oficial", price: 50000, monthly: 35000 },
+    { id: "crm", name: "Integração CRM Premium", price: 80000, monthly: 25000 },
+    { id: "voice", name: "Voz (Áudio <-> Texto)", price: 95000, monthly: 55000 },
+    { id: "vision", name: "Visão Computacional", price: 120000, monthly: 85000 },
+    { id: "calendar", name: "Agendamento Inteligente", price: 65000, monthly: 20000 },
+    { id: "active", name: "Nutrição Automática", price: 75000, monthly: 45000 },
 ];
 
 // 3. ESCALA (Cyan)
@@ -100,8 +100,8 @@ const scaleServices = [
         id: "ads-traffic",
         name: "Gestão de Tráfego",
         description: "Meta & Google Ads",
-        setupPrice: 75000,
-        monthlyPrice: 85000,
+        setupPrice: 100000,
+        monthlyPrice: 200000,
         icon: Activity
     },
     {
@@ -109,7 +109,7 @@ const scaleServices = [
         name: "Gestão Social Media",
         description: "Posts e Comunidade",
         setupPrice: 0,
-        monthlyPrice: 150000,
+        monthlyPrice: 250000,
         icon: Instagram
     },
     {
@@ -117,7 +117,7 @@ const scaleServices = [
         name: "Criação Conteúdo",
         description: "Vídeos curtos/Design",
         setupPrice: 0,
-        monthlyPrice: 230000,
+        monthlyPrice: 350000,
         icon: Video
     },
     {
@@ -125,7 +125,7 @@ const scaleServices = [
         name: "Copy & Email Mkt",
         description: "Fúnis de Venda",
         setupPrice: 55000,
-        monthlyPrice: 65000,
+        monthlyPrice: 120000,
         icon: PenTool
     },
     {
@@ -133,7 +133,7 @@ const scaleServices = [
         name: "SEO Técnico",
         description: "Rankeamento Google",
         setupPrice: 80000,
-        monthlyPrice: 45000,
+        monthlyPrice: 180000,
         icon: Search
     },
     {
@@ -141,7 +141,7 @@ const scaleServices = [
         name: "Analytics & BI",
         description: "Relatórios de Dados",
         setupPrice: 60000,
-        monthlyPrice: 35000,
+        monthlyPrice: 100000,
         icon: BarChart3
     },
 ];
@@ -558,7 +558,12 @@ export default function InvestmentCalculator() {
                                                             </div>
 
                                                             <div className="text-[10px] font-mono text-gray-500 uppercase tracking-wider pl-1">
-                                                                {srv.setupPrice > 0 ? `Setup: ${formatCurrency(srv.setupPrice)}` : `Mensal: ${formatCurrency(srv.monthlyPrice)}`}
+                                                                {(srv.setupPrice > 0 && srv.monthlyPrice > 0)
+                                                                    ? `${formatCurrency(srv.setupPrice)} Setup + ${formatCurrency(srv.monthlyPrice)}/mês`
+                                                                    : srv.setupPrice > 0
+                                                                        ? `Setup: ${formatCurrency(srv.setupPrice)}`
+                                                                        : `Mensal: ${formatCurrency(srv.monthlyPrice)}`
+                                                                }
                                                             </div>
                                                         </div>
                                                     ))}
@@ -804,8 +809,51 @@ Itens: ${items.join(", ")}
                                 {(!formStep4.company || !formStep4.nif) ? 'Preencha o Passo 4' : 'Validar Proposta'}
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
-                            <p className="text-[10px] text-gray-600 text-center mt-3">
-                                Ao validar, você receberá a proposta oficial diretamente no WhatsApp.
+
+                            {/* Secondary CTA: Discuss without validating */}
+                            <button
+                                disabled={!formStep4.company || !formStep4.nif || !formStep4.repName || !formStep4.phone}
+                                onClick={() => {
+                                    // 1. Gather Cart Data (Re-used logic)
+                                    const items = [
+                                        infraCore && infraOptions.find(i => i.id === infraCore)?.name,
+                                        ...infraSelection.map(id => infraAddons.find(a => a.id === id)?.name),
+                                        autoCoreId && autoOptions.find(i => i.id === autoCoreId)?.name,
+                                        ...autoSelection.map(id => autoAddons.find(a => a.id === id)?.name),
+                                        ...scaleSelection.map(id => scaleServices.find(s => s.id === id)?.name)
+                                    ].filter(Boolean);
+
+                                    // 2. Build Message
+                                    const message = `💬 *DISCUSSÃO DE PROPOSTA (CALCULADORA)*
+-----------------------------------
+*🏢 CLIENTE*
+Empresa: ${formStep4.company}
+NIF: ${formStep4.nif}
+Rep: ${formStep4.repName}
+Contato: ${formStep4.phone} / ${formStep4.email}
+
+*💰 INVESTIMENTO EM ANÁLISE*
+Itens: ${items.join(", ")}
+-----------------------------------
+*Setup: ${formatCurrency(totals.setup)} Kz*
+*Mensal: ${formatCurrency(totals.monthly)} Kz/mês*
+-----------------------------------
+*DÚVIDA:* Estou interessado nesta configuração mas gostaria de esclarecer alguns pontos antes de validar...`;
+
+                                    window.open(`https://wa.me/244943634766?text=${encodeURIComponent(message)}`, '_blank');
+                                }}
+                                className={`w-full py-3 mt-3 text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 group/discuss ${(!formStep4.company || !formStep4.nif || !formStep4.repName || !formStep4.phone)
+                                    ? 'bg-zinc-800 text-gray-600 cursor-not-allowed border border-white/5'
+                                    : 'bg-[#25D366] text-black hover:bg-[#20bd5a] hover:scale-[1.02] shadow-[0_0_20px_rgba(37,211,102,0.2)]'
+                                    }`}
+                            >
+                                <svg viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 transition-colors ${(!formStep4.company || !formStep4.nif || !formStep4.repName || !formStep4.phone) ? 'text-gray-600' : 'text-black'}`}>
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                </svg>
+                                Discutir Proposta
+                            </button>
+                            <p className="text-[10px] text-gray-500 text-center mt-4 border-t border-white/5 pt-3 leading-relaxed">
+                                Entre em contacto com nossos <span className="text-white font-bold">Consultores Estratégicos</span> para ajustar e validar o seu investimento em detalhe.
                             </p>
                         </div>
                     </div>

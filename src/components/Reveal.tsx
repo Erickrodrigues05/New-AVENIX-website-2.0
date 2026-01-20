@@ -23,12 +23,12 @@ export const Reveal = ({ children, width = "fit-content", delay = 0.25 }: Props)
         <div ref={ref} style={{ position: "relative", width, overflow: "hidden" }}>
             <motion.div
                 variants={{
-                    hidden: { opacity: 0, y: 50, scale: 0.95, filter: "blur(12px)" },
-                    visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+                    hidden: { opacity: 0, y: 30, scale: 0.98 }, // Removed blur for performance, reduced y distance
+                    visible: { opacity: 1, y: 0, scale: 1 },
                 }}
                 initial="hidden"
                 animate={mainControls}
-                transition={{ duration: 0.9, delay: delay, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: delay, ease: "easeOut" }}
             >
                 {children}
             </motion.div>

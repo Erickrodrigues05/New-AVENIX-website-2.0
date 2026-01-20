@@ -48,7 +48,7 @@ const systems = [
             "Automação de e-mail marketing comportamental",
             "Scoring preditivo de LTV (Lifetime Value)"
         ],
-        gradient: "from-avenix-cyan to-avenix-blue", // Cyan to Avenix Blue
+        gradient: "from-avenix-cyan to-blue-500", // Fixed contrast: ends in visible blue, not black-blue
         align: "left"
     }
 ];
@@ -72,10 +72,10 @@ export default function SystemDetails() {
                             {/* Visual Side */}
                             <div className="flex-1 w-full perspective-1000">
                                 <Reveal width="100%">
-                                    <div className="relative group transform transition-transform duration-700 hover:rotate-y-2 hover:scale-105">
+                                    <div className="relative group transform transition-transform duration-500 hover:rotate-y-2 hover:scale-105">
 
                                         {/* Ambient Glow */}
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${sys.gradient} opacity-20 blur-[100px] rounded-full group-hover:opacity-30 transition-opacity duration-700`} />
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${sys.gradient} opacity-20 blur-[100px] rounded-full group-hover:opacity-30 transition-opacity duration-500`} />
 
                                         {/* Holographic Card */}
                                         <div className="relative bg-zinc-900/80 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 md:p-12 overflow-hidden group-hover:border-white/20 transition-colors">

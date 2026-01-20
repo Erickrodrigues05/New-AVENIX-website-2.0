@@ -39,10 +39,10 @@ export default function Partnership() {
                                 {/* Logo Integration */}
                                 <div className="relative w-32 h-32 mb-6 group-hover:scale-105 transition-transform duration-500">
                                     <Image
-                                        src="/aspireverse-logo.png"
+                                        src="/aspireverse-new.jpg"
                                         alt="Aspireverse"
                                         fill
-                                        className="object-contain drop-shadow-[0_0_25px_rgba(0,212,255,0.2)]"
+                                        className="object-contain rounded-lg shadow-lg"
                                     />
                                 </div>
 

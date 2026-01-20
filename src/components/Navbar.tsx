@@ -12,22 +12,22 @@ export default function Navbar() {
         hidden: {
             x: "100%",
             transition: {
-                duration: 0.8,
-                ease: [0.76, 0, 0.24, 1] as any // Force bypass type check for custom bezier
+                duration: 0.5,
+                ease: [0.32, 0.72, 0, 1] as any // Snappier "ease-out" feel
             }
         },
         visible: {
             x: "0%",
             transition: {
-                duration: 0.8,
-                ease: [0.76, 0, 0.24, 1] as any
+                duration: 0.5,
+                ease: [0.32, 0.72, 0, 1] as any
             }
         },
         exit: {
             x: "100%",
             transition: {
-                duration: 0.8,
-                ease: [0.76, 0, 0.24, 1] as any
+                duration: 0.4,
+                ease: [0.32, 0.72, 0, 1] as any
             }
         }
     };
@@ -82,7 +82,7 @@ export default function Navbar() {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, transition: { delay: 0.2 } }}
+                        exit={{ opacity: 0, transition: { duration: 0.3 } }}
                         className="fixed inset-0 z-40 bg-black/95 backdrop-blur-3xl md:hidden flex flex-col justify-center px-8"
                     >
                         {/* Decorative Background Elements */}
