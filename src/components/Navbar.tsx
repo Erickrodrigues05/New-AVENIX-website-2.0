@@ -35,7 +35,7 @@ export default function Navbar() {
     const navLinks = [
         { name: "Sistemas", href: "/sistema" },
         { name: "Operação", href: "/como-funciona" },
-        { name: "Resultados", href: "/work" },
+        { name: "Resultados", href: "/trabalho" },
         { name: "Sobre Nós", href: "/about" },
         { name: "Comunidade", href: "/community" },
     ];

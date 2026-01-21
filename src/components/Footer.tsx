@@ -28,7 +28,7 @@ export default function Footer() {
                             <li><Link href="/" className="hover:text-avenix-orange transition-colors">Início</Link></li>
                             <li><Link href="/sistema" className="hover:text-avenix-orange transition-colors">Sistemas</Link></li>
                             <li><Link href="/como-funciona" className="hover:text-avenix-orange transition-colors">Operação</Link></li>
-                            <li><Link href="/work" className="hover:text-avenix-orange transition-colors">Resultados</Link></li>
+                            <li><Link href="/trabalho" className="hover:text-avenix-orange transition-colors">Resultados</Link></li>
                         </ul>
                     </div>
 
