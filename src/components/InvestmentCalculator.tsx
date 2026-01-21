@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Check, Server, Layout, Gem, Bot, BrainCircuit, Sparkles,
@@ -798,7 +799,28 @@ Itens: ${items.join(", ")}
 -----------------------------------
 *AGENDA:* Tenho interesse nesta configuração e gostaria de *agendar uma reunião* para validação técnica.`;
 
-                                    // 3. Open WhatsApp
+                                    // 3. Save to Supabase (Fire and Forget to not block UI)
+                                    const saveLead = async () => {
+                                        try {
+                                            await supabase.from('leads').insert({
+                                                company_name: formStep4.company,
+                                                nif: formStep4.nif,
+                                                contact_name: formStep4.repName,
+                                                phone: formStep4.phone,
+                                                email: formStep4.email,
+                                                service_interest: items,
+                                                estimated_budget_setup: totals.setup,
+                                                estimated_budget_monthly: totals.monthly,
+                                                status: 'NOV_PROPOSTA',
+                                                source: 'CALCULATOR_VALIDATE'
+                                            });
+                                        } catch (error) {
+                                            console.error("Error saving lead:", error);
+                                        }
+                                    };
+                                    saveLead();
+
+                                    // 4. Open WhatsApp
                                     window.open(`https://wa.me/244943634766?text=${encodeURIComponent(message)}`, '_blank');
                                 }}
                                 className={`group w-full py-4 font-bold rounded-xl flex items-center justify-center gap-2 transition-all ${(!formStep4.company || !formStep4.nif || !formStep4.repName || !formStep4.phone)
@@ -839,6 +861,27 @@ Itens: ${items.join(", ")}
 *Mensal: ${formatCurrency(totals.monthly)} Kz/mês*
 -----------------------------------
 *DÚVIDA:* Estou interessado nesta configuração mas gostaria de esclarecer alguns pontos antes de validar...`;
+
+                                    // 3. Save to Supabase
+                                    const saveLead = async () => {
+                                        try {
+                                            await supabase.from('leads').insert({
+                                                company_name: formStep4.company,
+                                                nif: formStep4.nif,
+                                                contact_name: formStep4.repName,
+                                                phone: formStep4.phone,
+                                                email: formStep4.email,
+                                                service_interest: items,
+                                                estimated_budget_setup: totals.setup,
+                                                estimated_budget_monthly: totals.monthly,
+                                                status: 'DISCUSSÃO',
+                                                source: 'CALCULATOR_DISCUSS'
+                                            });
+                                        } catch (error) {
+                                            console.error("Error saving lead:", error);
+                                        }
+                                    };
+                                    saveLead();
 
                                     window.open(`https://wa.me/244943634766?text=${encodeURIComponent(message)}`, '_blank');
                                 }}

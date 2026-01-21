@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 import { Check, Loader2, ArrowRight, Building2, Users, Target, Briefcase, Globe, UserCheck, CreditCard, Layers, Calendar, Rocket, Lock } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -407,15 +408,38 @@ Mensal: ${formatCurrency(investmentData.totals.monthly)} Kz/mês`;
                                     </div>
                                 </div>
 
-                                <a
-                                    href={getWhatsAppLink()}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <button
+                                    onClick={async () => {
+                                        // 1. Save to Supabase
+                                        try {
+                                            const { error } = await supabase.from('leads').insert({
+                                                company_name: formData.company,
+                                                nif: formData.nif,
+                                                contact_name: formData.repName,
+                                                email: null,
+                                                estimated_budget_setup: investmentData ? investmentData.totals.setup : 0,
+                                                estimated_budget_monthly: investmentData ? investmentData.totals.monthly : 0,
+                                                status: 'DIAGNOSTICO',
+                                                source: 'DIAGNOSIS_WIZARD',
+                                                // Store the full diagnosis profile in the JSONB column
+                                                service_interest: {
+                                                    profile: formData,
+                                                    cart: investmentData
+                                                }
+                                            });
+                                            if (error) console.error("Supabase Error:", error);
+                                        } catch (err) {
+                                            console.error("Save Error:", err);
+                                        }
+
+                                        // 2. Redirect to WhatsApp
+                                        window.open(getWhatsAppLink(), '_blank');
+                                    }}
                                     className="btn btn-secondary w-full py-5 flex items-center justify-center gap-3 text-lg group hover:bg-avenix-cyan hover:text-black transition-all shadow-[0_0_30px_rgba(0,212,255,0.2)]"
                                 >
                                     Agendar Sessão Estratégica
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </a>
+                                </button>
                                 <p className="text-xs text-gray-600 mt-4 text-center">Protocolo de Segurança: Os seus dados estratégicos estão encriptados.</p>
                             </motion.div>
                         )}
